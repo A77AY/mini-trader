@@ -36,16 +36,6 @@ var candlestick = techan.plot.candlestick()
     .xScale(x)
     .yScale(y);
 
-var tradearrow = techan.plot.tradearrow()
-    .xScale(x)
-    .yScale(y)
-    .y(function (d) {
-        // Display the buy and sell arrows a bit above and below the price, so the price is still visible
-        if (d.type === 'buy') return y(d.low) + 5;
-        if (d.type === 'sell') return y(d.high) - 5;
-        else return y(d.price);
-    });
-
 var sma0 = techan.plot.sma()
     .xScale(x)
     .yScale(y);
@@ -62,10 +52,6 @@ var volume = techan.plot.volume()
     .accessor(candlestick.accessor())   // Set the accessor to a ohlc accessor so we get highlighted bars
     .xScale(x)
     .yScale(yVolume);
-
-var trendline = techan.plot.trendline()
-    .xScale(x)
-    .yScale(y);
 
 var supstance = techan.plot.supstance()
     .xScale(x)
@@ -294,22 +280,11 @@ indicatorSelection.append("g")
 svg.append('g')
     .attr("class", "crosshair ohlc");
 
-svg.append("g")
-    .attr("class", "tradearrow")
-    .attr("clip-path", "url(#ohlcClip)");
-
 svg.append('g')
     .attr("class", "crosshair macd");
 
 svg.append('g')
     .attr("class", "crosshair rsi");
-
-svg.append("g")
-    .attr("class", "trendlines analysis")
-    .attr("clip-path", "url(#ohlcClip)");
-svg.append("g")
-    .attr("class", "supstances analysis")
-    .attr("clip-path", "url(#ohlcClip)");
 
 d3.select("button").on("click", reset);
 
@@ -369,10 +344,6 @@ d3.csv("data.csv", function (error, data) {
     svg.select("g.crosshair.ohlc").call(ohlcCrosshair).call(zoom);
     svg.select("g.crosshair.macd").call(macdCrosshair).call(zoom);
     svg.select("g.crosshair.rsi").call(rsiCrosshair).call(zoom);
-    svg.select("g.trendlines").datum(trendlineData).call(trendline).call(trendline.drag);
-    svg.select("g.supstances").datum(supstanceData).call(supstance).call(supstance.drag);
-
-    svg.select("g.tradearrow").datum(trades).call(tradearrow);
 
     var zoomable = x.zoomable();
     zoomable.domain([indicatorPreRoll, data.length]); // Zoom in a little to hide indicator preroll
@@ -415,7 +386,4 @@ function draw() {
     svg.select("g.crosshair.ohlc").call(ohlcCrosshair.refresh);
     svg.select("g.crosshair.macd").call(macdCrosshair.refresh);
     svg.select("g.crosshair.rsi").call(rsiCrosshair.refresh);
-    svg.select("g.trendlines").call(trendline.refresh);
-    svg.select("g.supstances").call(supstance.refresh);
-    svg.select("g.tradearrow").call(tradearrow.refresh);
 }
