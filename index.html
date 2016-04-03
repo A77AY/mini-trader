@@ -4,14 +4,113 @@
     <meta charset="utf-8">
     <title>Технический анализ</title>
     <link rel="stylesheet" href="styles/main.css">
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="libs/materialize/css/materialize.min.css" media="screen,projection"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
 
-<button>Reset</button>
 
+<div class="card-panel">
+    <div id="graph"></div>
+
+
+    <div class="row">
+        <div class="col s4">
+            <p class="flow-text">График</p>
+            <p>
+                <input name="type" type="radio" id="cand" checked/>
+                <label for="cand">Японские свечи</label>
+            </p>
+            <p>
+                <input name="type" type="radio" id="ohlc"/>
+                <label for="ohlc">OHLC (Open High Low Close)</label>
+            </p>
+            <p>
+                <input name="type" type="radio" id="close"/>
+                <label for="close">Линия</label>
+            </p>
+        </div>
+        <div class="col s4">
+            <p class="flow-text">Тип</p>
+            <p>
+                <input name="data" type="radio" id="day" checked/>
+                <label for="day">Дневной</label>
+            </p>
+            <p>
+                <input name="data" type="radio" id="week"/>
+                <label for="week">Недельный</label>
+            </p>
+            <p>
+                <input name="data" type="radio" id="month"/>
+                <label for="month">Месячный</label>
+            </p></div>
+        <div class="col s4">
+            <p class="flow-text">Ценная бумага</p>
+            <p>
+                <input name="cen" type="radio" id="BANE" checked/>
+                <label for="BANE">Башнефть (Public Joint Stock Oil Company Bashneft)</label>
+            </p>
+            <p>
+                <input name="cen" type="radio" id="KMAZ"/>
+                <label for="KMAZ">Камаз (KAMAZ Publicly Traded Company)</label>
+            </p>
+            <p>
+                <input name="cen" type="radio" id="YNDX"/>
+                <label for="YNDX">Яндекс (Yandex N.V.)</label>
+            </p>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col s4">
+            <p class="flow-text">Технический анализ</p>
+            <p>
+                <input type="checkbox" id="isMacd"/>
+                <label for="isMacd">MACD</label>
+            </p>
+            <p>
+                <input type="checkbox" id="isRsi"/>
+                <label for="isRsi">RSI</label>
+            </p>
+        </div>
+        <div class="col s4">
+            <p class="flow-text">На графике</p>
+
+            <p>
+                <input type="checkbox" id="isSma"/>
+                <label for="isSma">SMA</label>
+            </p>
+            <p>
+                <input type="checkbox" id="isEma"/>
+                <label for="isEma">EMA</label>
+            </p>
+            <p>
+                <input type="checkbox" id="isIchimoku"/>
+                <label for="isIchimoku">Ишимоку (Ichimoku Cloud)</label>
+            </p>
+        </div>
+    </div>
+
+
+
+
+
+    <p class="flow-text">Управление</p>
+    <p class="flow-text">Колесико мыши - увеличить/уменьшить график</p>
+    <p class="flow-text">Клик и движение - перемещение по графику</p>
+</div>
+
+
+<script type="text/javascript" src="libs/jquery-2.2.2.min.js"></script>
+<script type="text/javascript" src="libs/materialize/js/materialize.min.js"></script>
 <script src="libs/d3.min.js"></script>
 <script src="libs/techan.min.js"></script>
-<script src="scripts/main.js"></script>
+<script src="scripts/main.min.js"></script>
 
 </body>
 </html>
