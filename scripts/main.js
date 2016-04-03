@@ -487,4 +487,8 @@ function update() {
     Graph(element, currentIndicators, oIndicators, type, cen, data, val);
 }
 
+$(window).resize(()=>{
+    update();
+});
+
 update();
