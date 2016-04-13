@@ -167,27 +167,22 @@ path.middle, path.zero {
 
 .tradearrow path.tradearrow {
     stroke: none;
+    stroke-width: 2;
 }
 
 .tradearrow path.buy {
-    fill: #0000FF;
+    fill: #00ff03;
+    stroke: #002c01;
 }
 
 .tradearrow path.sell {
-    fill: #9900FF;
+    fill: #ff0004;
+    stroke: #3a0002;
 }
 
 .tradearrow path.highlight {
     fill: none;
-    stroke-width: 2;
-}
-
-.tradearrow path.highlight.buy {
-    stroke: #0000FF;
-}
-
-.tradearrow path.highlight.sell {
-    stroke: #9900FF;
+    stroke-width: 6;
 }
 
 path.ohlc {
@@ -248,4 +243,22 @@ path.line {
 
 .ichimoku path.senkouspanb {
     stroke: #FF0000;
+}
+
+.stochastic path {
+    fill: none;
+    stroke-width: 1;
+}
+
+.stochastic.up {
+    stroke: #00AA00;
+}
+
+.stochastic.down {
+    stroke: #FF0000;
+}
+
+.stochastic path.overbought, .stochastic path.oversold {
+    stroke: #FF9999;
+    stroke-dasharray: 5, 5;
 }
