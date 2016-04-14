@@ -1,4 +1,4 @@
-function Graph(element, indicators, oIndicators, type, cen, dataType, val) {
+function Graph(element, indicators, oIndicators, type, file, val) {
   const indicatorsArr = [];
 
   if (indicators.isMacd) indicatorsArr.push("macd");
@@ -355,7 +355,7 @@ function Graph(element, indicators, oIndicators, type, cen, dataType, val) {
 
   d3.select("button").on("click", reset);
 
-  d3.csv("data/" + cen + "-" + dataType + ".csv", (error, data) => {
+  d3.csv(file, (error, data) => {
     var accessor = candlestick.accessor(),
       indicatorPreRoll = 33;  // Don't show where indicators don't have data
 
@@ -581,36 +581,49 @@ document.getElementById('close').addEventListener('change', (e)=> {
 });
 
 
+let file;
+
+function setFile(cen, data) {
+  file = "data/" + cen + "-" + data + ".csv";
+}
+
 ///
 let data = 'd';
 let val = '₽';
+let cen = 'BANE';
 document.getElementById('day').addEventListener('change', (e)=> {
   data = 'd';
+  setFile(cen, data);
   update();
 });
 document.getElementById('week').addEventListener('change', (e)=> {
   data = 'w';
+  setFile(cen, data);
   update();
 });
 document.getElementById('month').addEventListener('change', (e)=> {
   data = 'm';
+  setFile(cen, data);
   update();
 });
 
-let cen = 'BANE';
+
 document.getElementById('BANE').addEventListener('change', (e)=> {
   cen = 'BANE';
   val = '₽';
+  setFile(cen, data);
   update();
 });
 document.getElementById('YNDX').addEventListener('change', (e)=> {
   cen = 'YNDX';
   val = '$';
+  setFile(cen, data);
   update();
 });
 document.getElementById('KMAZ').addEventListener('change', (e)=> {
   cen = 'KMAZ';
   val = '₽';
+  setFile(cen, data);
   update();
 });
 
@@ -633,11 +646,28 @@ for (const key in indicators) {
 }
 
 function update() {
-  Graph(element, currentIndicators, oIndicators, type, cen, data, val);
+  Graph(element, currentIndicators, oIndicators, type, file, val);
 }
+
+
+function handleFileSelect(e) {
+  const f = e.target.files[0];
+  var reader = new FileReader();
+  reader.onload = ((theFile) => {
+    return function(evt) {
+      val = '';
+      file= evt.target.result;
+      update();
+    };
+  })(f);
+  reader.readAsDataURL(f);
+}
+
+document.getElementById('file').addEventListener('change', handleFileSelect, false);
 
 $(window).resize(()=> {
   update();
 });
 
-var graph = Graph(element, currentIndicators, oIndicators, type, cen, data, val);
+setFile(cen, data);
+update();
